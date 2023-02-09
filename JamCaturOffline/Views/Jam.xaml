@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="JamCaturOffline.Views.Jam"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             xmlns:vm="clr-namespace:JamCaturOffline.ViewModels"
+             xmlns:conv="clr-namespace:JamCaturOffline.Converters"
+             x:DataType="vm:JamVM"
+             Title="Jam">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <conv:HourCheckConverter x:Key="timeConvert"/>
+
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,50,*" BackgroundColor="Black">
+            <Button Text="{Binding RemainingWhite, StringFormat='{}{0:mm}:{0:ss}'}"
+                    Command="{Binding TimeWhiteClickedCommand}"
+                    IsEnabled="{Binding BtnWhiteEnabled}"
+                    Style="{StaticResource WhiteButtonStyle}"
+                    CornerRadius="0"/>
+
+
+
+            <StackLayout Orientation="Horizontal"
+                         Grid.Row="1">
+                
+                <Button ImageSource="continues.png"
+                        Margin="10,0,0,0"
+                        BackgroundColor="Transparent"
+                        IsVisible="{Binding BtnContinuesVisibled}"
+                        Command="{Binding ContinuesCommand}"/>
+
+                <Button ImageSource="start.png"
+                        Margin="10,0,0,0"
+                        BackgroundColor="Transparent"
+                        IsEnabled="{Binding BtnStartEnabled}"
+                        IsVisible="{Binding BtnStartVisible}"
+                        Command="{Binding StartCommand}"/>
+
+                <Button ImageSource="pause.png"
+                        BackgroundColor="Transparent"
+                        IsEnabled="{Binding BtnPauseEnabled}"
+                        Command="{Binding PauseProgressCommand}"/>
+
+
+                <Button ImageSource="stop.png"
+                        BackgroundColor="Transparent"
+                        IsEnabled="{Binding BtnStopEnabled}"
+                        Command="{Binding StopProgressCommand}"/>
+                
+                <Button ImageSource="setting.png"
+                        HorizontalOptions="EndAndExpand"
+                        Margin="0,0,10,0"
+                        BackgroundColor="Transparent"
+                        IsEnabled="{Binding ResetBtnEnabled}"
+                        Command="{Binding ResetCommand}"/>
+
+
+            </StackLayout>
+            <Button Text="{Binding RemainingBlack, StringFormat='{}{0:mm}:{0:ss}'}"
+                    Grid.Row="2"
+                    Command="{Binding TimeBlackClickedCommand}"
+                    IsEnabled="{Binding BtnBlackEnabled}"
+                    Style="{StaticResource BlackButtonStyle}"
+                    CornerRadius="0"/>
+
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
